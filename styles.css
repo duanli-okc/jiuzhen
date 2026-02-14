@@ -223,8 +223,8 @@ a:hover {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    padding: 0 16px;
+    gap: 4px; /* Reduced from 8px */
+    padding: 0 10px; /* Reduced from 16px */
     height: 36px;
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
@@ -234,6 +234,7 @@ a:hover {
     background: var(--bg-primary);
     color: var(--text-primary);
     transition: var(--transition-fast);
+    white-space: nowrap;
 }
 
 .btn:hover {
@@ -565,6 +566,12 @@ a:hover {
 }
 
 /* 病人列表区域 */
+.patient-list-container {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+}
+
 .patient-section {
     border-bottom: 1px solid var(--border-light);
 }
@@ -624,8 +631,9 @@ a:hover {
 }
 
 .section-content {
-    max-height: 300px;
-    overflow-y: auto;
+    /* 移除固定高度和内部滚动，交由外层 .patient-list-container 统一滚动 */
+    /* max-height: 300px; */
+    /* overflow-y: auto; */
 }
 
 .section-content.collapsed {
@@ -1618,7 +1626,7 @@ a:hover {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 24px;
+    padding: 0 12px; /* Reduced from 24px */
     z-index: 100;
     box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
 }
@@ -1626,15 +1634,61 @@ a:hover {
 .action-left,
 .action-right {
     display: flex;
-    gap: 10px;
+    gap: 6px; /* Reduced from 10px */
 }
 
 .send-btn {
-    min-width: 140px;
+    min-width: 120px; /* Reduced from 140px */
 }
 
 .complete-btn {
-    min-width: 120px;
+    min-width: 100px; /* Reduced from 120px */
+}
+
+/* 更多操作菜单 */
+.dropup-container {
+    position: relative;
+}
+
+.dropup-menu {
+    display: none;
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    margin-bottom: 8px;
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    min-width: 160px;
+    z-index: 1000;
+    padding: 4px 0;
+}
+
+.dropup-menu.show {
+    display: block;
+    animation: fadeIn var(--transition-fast);
+}
+
+.dropup-menu a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 13px;
+    transition: var(--transition-fast);
+}
+
+.dropup-menu a:hover {
+    background: var(--bg-secondary);
+    color: var(--primary-color);
+}
+
+.dropup-menu i {
+    width: 16px;
+    text-align: center;
 }
 
 /* ============================================
@@ -2231,6 +2285,15 @@ a:hover {
     
     .bottom-action-bar {
         right: 0;
+        height: auto;
+        flex-wrap: wrap;
+        padding: 10px 24px;
+        gap: 10px;
+    }
+    
+    .action-left,
+    .action-right {
+        flex-wrap: wrap;
     }
 }
 
